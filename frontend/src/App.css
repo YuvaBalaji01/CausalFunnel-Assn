@@ -1,0 +1,485 @@
+/* App.css — layout shell */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────── */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 60px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.navbar__brand span {
+    color: var(--accent);
+}
+
+.navbar__logo {
+    font-size: 1.4rem;
+}
+
+.navbar__nav {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.navbar__link {
+    padding: 0.45rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text2);
+    transition: background var(--transition), color var(--transition);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.navbar__link:hover {
+    background: var(--surface2);
+    color: var(--text);
+}
+
+.navbar__link.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+}
+
+.navbar__badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+}
+
+/* ─── Main area ──────────────────────────────────────────────────────────── */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ─── Page header ────────────────────────────────────────────────────────── */
+.page-header {
+    margin-bottom: 1.75rem;
+}
+
+.page-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.page-header p {
+    color: var(--text2);
+    font-size: 0.9rem;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.card--clickable {
+    cursor: pointer;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.card--clickable:hover {
+    border-color: var(--border2);
+    box-shadow: var(--shadow);
+    transform: translateY(-1px);
+}
+
+.card--selected {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent), var(--shadow) !important;
+}
+
+/* ─── Stats strip ────────────────────────────────────────────────────────── */
+.stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+}
+
+.stat-card__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+}
+
+.stat-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-card__value.accent {
+    color: var(--accent);
+}
+
+.stat-card__value.teal {
+    color: var(--accent2);
+}
+
+.stat-card__value.success {
+    color: var(--success);
+}
+
+/* ─── Table ──────────────────────────────────────────────────────────────── */
+.table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+thead tr {
+    background: var(--surface2);
+}
+
+th {
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--text2);
+}
+
+tr:hover td {
+    background: var(--surface2);
+}
+
+tr.row--selected td {
+    background: var(--accent-dim);
+    color: var(--text);
+}
+
+/* ─── Badge / pill ───────────────────────────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge--page-view {
+    background: var(--accent-dim);
+    color: var(--accent);
+}
+
+.badge--click {
+    background: var(--accent2-dim);
+    color: var(--accent2);
+}
+
+/* ─── Event timeline ─────────────────────────────────────────────────────── */
+.timeline {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline__item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.timeline__item:last-child {
+    border-bottom: none;
+}
+
+.timeline__dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 0.35rem;
+}
+
+.timeline__dot--page-view {
+    background: var(--accent);
+}
+
+.timeline__dot--click {
+    background: var(--accent2);
+}
+
+.timeline__body {
+    flex: 1;
+}
+
+.timeline__type {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+}
+
+.timeline__meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn--primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn--ghost {
+    background: var(--surface2);
+    color: var(--text2);
+    border: 1px solid var(--border);
+}
+
+.btn--ghost:hover {
+    border-color: var(--border2);
+    color: var(--text);
+}
+
+.btn--sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+}
+
+/* ─── Select ─────────────────────────────────────────────────────────────── */
+.select-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+select {
+    appearance: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 0.55rem 2.5rem 0.55rem 0.9rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: border-color var(--transition);
+    min-width: 260px;
+}
+
+select:hover,
+select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+/* ─── States ─────────────────────────────────────────────────────────────── */
+.state-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    text-align: center;
+    gap: 0.75rem;
+}
+
+.state-box__icon {
+    font-size: 3rem;
+}
+
+.state-box__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text2);
+}
+
+.state-box__desc {
+    font-size: 0.85rem;
+    max-width: 320px;
+}
+
+/* ─── Spinner ────────────────────────────────────────────────────────────── */
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Heatmap canvas wrapper ─────────────────────────────────────────────── */
+.heatmap-wrap {
+    position: relative;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex: 1;
+}
+
+.heatmap-canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+}
+
+.heatmap-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* ─── Two-column layouts ─────────────────────────────────────────────────── */
+.split-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .navbar {
+        padding: 0 1rem;
+    }
+}
+
+.section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ─── Toolbar row ────────────────────────────────────────────────────────── */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.toolbar__label {
+    font-size: 0.85rem;
+    color: var(--text2);
+    white-space: nowrap;
+}
+
+/* ─── Error box ──────────────────────────────────────────────────────────── */
+.error-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem;
+    background: #ff6b6b18;
+    border: 1px solid var(--danger);
+    border-radius: var(--radius);
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+}

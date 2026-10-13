@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CausalFunnel Tracker Demo</title>
+    <style>
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d2e;
+        --border: #2a2d3e;
+        --accent: #6c63ff;
+        --accent2: #00d4aa;
+        --text: #e2e8f0;
+        --muted: #8892a4;
+        --danger: #ff6b6b;
+        --success: #51cf66;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1.25rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      header h1 { font-size: 1.25rem; color: var(--accent); font-weight: 700; }
+      header p { font-size: 0.8rem; color: var(--muted); }
+      .badge {
+        background: var(--accent);
+        color: #fff;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+      .info-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 2rem;
+        font-size: 0.875rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .info-box strong { color: var(--text); }
+      .session-info {
+        background: var(--surface);
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 2rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-family: monospace;
+      }
+      h2 {
+        font-size: 1rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.15s, border-color 0.15s, background 0.15s;
+        user-select: none;
+      }
+      .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+      .card:active { transform: scale(0.96); }
+      .card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+      .card .label { font-size: 0.85rem; color: var(--muted); }
+      .card .clicks {
+        margin-top: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+      button {
+        padding: 0.65rem 1.25rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.15s, transform 0.1s;
+      }
+      button:hover { opacity: 0.85; }
+      button:active { transform: scale(0.97); }
+      .btn-primary { background: var(--accent); color: #fff; }
+      .btn-success { background: var(--success); color: #111; }
+      .btn-danger  { background: var(--danger);  color: #fff; }
+      .btn-teal    { background: var(--accent2); color: #111; }
+      a.link-btn {
+        display: inline-block;
+        padding: 0.65rem 1.25rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: border-color 0.15s;
+      }
+      a.link-btn:hover { border-color: var(--accent); }
+      .log {
+        background: #0a0c12;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        height: 180px;
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+      .log p { margin-bottom: 0.3rem; }
+      .log .ok    { color: var(--success); }
+      .log .err   { color: var(--danger); }
+      .log .info  { color: var(--accent); }
+      .dashboard-link {
+        text-align: center;
+        padding: 2rem;
+        background: var(--surface);
+        border-radius: 10px;
+        border: 1px solid var(--border);
+      }
+      .dashboard-link p { margin-bottom: 1rem; color: var(--muted); font-size: 0.9rem; }
+      footer {
+        text-align: center;
+        padding: 2rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div>
+        <h1>⚡ CausalFunnel Tracker Demo</h1>
+        <p>Every click and page load is being recorded.</p>
+      </div>
+      <span class="badge">LIVE</span>
+    </header>
+
+    <div class="container">
+
+      <div class="info-box">
+        <strong>How tracking works:</strong> The <code>tracker.js</code> script (served from the backend)
+        auto-fires a <code>page_view</code> event on load and a <code>click</code> event on every click.
+        Your session ID is stored in <code>localStorage</code> so all events within this tab share one session.
+        Click anything on this page and then open the <strong>Dashboard → Sessions</strong> to see the data.
+      </div>
+
+      <div class="session-info" id="session-display">Session ID: loading…</div>
+
+      <h2>🖱️ Interactive Elements</h2>
+
+      <div class="grid" id="cards">
+        <div class="card" data-name="🧩 Feature A"><div class="icon">🧩</div><div class="label">Feature A</div><div class="clicks" data-counter>0</div></div>
+        <div class="card" data-name="📊 Analytics"><div class="icon">📊</div><div class="label">Analytics</div><div class="clicks" data-counter>0</div></div>
+        <div class="card" data-name="🎯 Campaigns"><div class="icon">🎯</div><div class="label">Campaigns</div><div class="clicks" data-counter>0</div></div>
+        <div class="card" data-name="📦 Products"><div class="icon">📦</div><div class="label">Products</div><div class="clicks" data-counter>0</div></div>
+        <div class="card" data-name="🔔 Alerts"><div class="icon">🔔</div><div class="label">Alerts</div><div class="clicks" data-counter>0</div></div>
+        <div class="card" data-name="⚙️ Settings"><div class="icon">⚙️</div><div class="label">Settings</div><div class="clicks" data-counter>0</div></div>
+      </div>
+
+      <h2>🔘 Button Panel</h2>
+      <div class="btn-row">
+        <button class="btn-primary" id="btn-save">💾 Save Progress</button>
+        <button class="btn-success" id="btn-export">📤 Export Data</button>
+        <button class="btn-danger"  id="btn-reset">🗑️ Clear Cache</button>
+        <button class="btn-teal"    id="btn-sync">🔄 Sync Now</button>
+        <a class="link-btn" href="http://localhost:5173" target="_blank">🚀 Open Dashboard ↗</a>
+      </div>
+
+      <h2>📋 Event Log (local)</h2>
+      <div class="log" id="log">
+        <p class="info">Waiting for events…</p>
+      </div>
+
+      <div class="dashboard-link">
+        <p>After clicking around, open the analytics dashboard to see your session data and heatmap.</p>
+        <a class="link-btn" href="http://localhost:5173" target="_blank">📈 Open Analytics Dashboard →</a>
+      </div>
+
+    </div>
+
+    <footer>CausalFunnel Tracker Demo &mdash; for development purposes only</footer>
+
+    <!-- Tracking script embedded via data-api-url attribute -->
+    <script
+      src="http://localhost:5000/tracker.js"
+      data-api-url="http://localhost:5000/api/events"
+    ></script>
+
+    <!-- Local demo interactivity (not part of the tracker) -->
+    <script>
+      // Show session ID
+      function getSessionId() {
+        try { return localStorage.getItem('cf_session_id') || 'not set'; } catch(e) { return 'blocked'; }
+      }
+      document.getElementById('session-display').textContent =
+        'Session ID: ' + getSessionId();
+
+      // Local event log
+      var log = document.getElementById('log');
+      log.innerHTML = '';
+      function logMsg(msg, cls) {
+        var p = document.createElement('p');
+        p.className = cls || '';
+        p.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+        log.prepend(p);
+      }
+
+      logMsg('page_view sent — session ' + getSessionId(), 'ok');
+
+      // Card click counters
+      document.getElementById('cards').addEventListener('click', function(e) {
+        var card = e.target.closest('.card');
+        if (!card) return;
+        var counter = card.querySelector('[data-counter]');
+        counter.textContent = parseInt(counter.textContent, 10) + 1;
+        logMsg('click on ' + card.dataset.name + ' (' + e.clientX + ', ' + e.clientY + ')', 'ok');
+      });
+
+      // Button log
+      ['btn-save','btn-export','btn-reset','btn-sync'].forEach(function(id) {
+        var btn = document.getElementById(id);
+        if (btn) btn.addEventListener('click', function() {
+          logMsg('click on button: ' + btn.textContent.trim(), 'info');
+        });
+      });
+    </script>
+  </body>
+</html>
