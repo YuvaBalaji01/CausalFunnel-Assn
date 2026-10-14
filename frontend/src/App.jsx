@@ -14,7 +14,8 @@ function Navbar({ activeTab, onTabChange }) {
       <div className="navbar__brand">
         <span className="navbar__logo">⚡</span>
         Causal<span>Funnel</span>
-        <span className="navbar__badge">Analytics</span>
+        <a href="http://localhost:5000/demo.html" target="_blank" rel="noreferrer"><span className="navbar__badge">Open Demo Page ↗ </span></a>
+     
       </div>
       <div className="navbar__nav" role="tablist">
         {TABS.map((t) => (
@@ -49,7 +50,7 @@ export default function App() {
         {activeTab === 'heatmap' && <Heatmap />}
       </main>
       <footer style={{ textAlign: 'center', padding: '1rem 2rem', borderTop: '1px solid var(--border)', color: 'var(--muted)', fontSize: '0.78rem' }}>
-        CausalFunnel Analytics Dashboard &mdash; for development purposes only &bull;{' '}
+        CausalFunnel Analytics Dashboard{' '}
         <a href="http://localhost:5000/demo.html" target="_blank" rel="noreferrer">Open Demo Page ↗</a>
       </footer>
     </div>
