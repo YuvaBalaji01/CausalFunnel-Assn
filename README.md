@@ -4,6 +4,10 @@ A lightweight user analytics application that tracks page views and clicks, stor
 
 ---
 
+DEMO Video : https://drive.google.com/file/d/1HNuwdoU5poun-9dmQ1wK8oxmrcDzKiAU/view?usp=sharing
+
+Live : https://causal-funnel-assn.vercel.app/
+
 ## Features
 
 | Feature | Details |
